@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import CourseList from './components/CourseList';
 import 'rbx/index.css';
 import { Button, Container, Title, Message } from 'rbx';
 import firebase from 'firebase/app';
@@ -6,18 +7,18 @@ import 'firebase/database';
 import 'firebase/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCelvCqiFUgi7G8DZC3Lh2qaUM4zw-11h4",
-  authDomain: "scheduler-f0cc3.firebaseapp.com",
-  databaseURL: "https://scheduler-f0cc3.firebaseio.com",
-  projectId: "scheduler-f0cc3",
-  storageBucket: "scheduler-f0cc3.appspot.com",
-  messagingSenderId: "604289317307",
-  appId: "1:604289317307:web:eb61b4086ba7052da76c9e",
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database().ref();
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCelvCqiFUgi7G8DZC3Lh2qaUM4zw-11h4",
+//   authDomain: "scheduler-f0cc3.firebaseapp.com",
+//   databaseURL: "https://scheduler-f0cc3.firebaseio.com",
+//   projectId: "scheduler-f0cc3",
+//   storageBucket: "scheduler-f0cc3.appspot.com",
+//   messagingSenderId: "604289317307",
+//   appId: "1:604289317307:web:eb61b4086ba7052da76c9e",
+// };
+// // Initialize Firebase
+// firebase.initializeApp(firebaseConfig);
+// const db = firebase.database().ref();
 
 const uiConfig = {
   signInFlow: 'popup',
@@ -121,38 +122,38 @@ const buttonColor = selected => (
   selected ? 'success' : null
 );
 
-const TermSelector = ({ state }) => (
-  <Button.Group hasAddons>
-  { Object.values(terms)
-      .map(value => 
-        <Button key={value}
-          color={ buttonColor(value === state.term) }
-          onClick={ () => state.setTerm(value) }
-          >
-          { value }
-        </Button>
-      )
-  }
-  </Button.Group>
-);
+// const TermSelector = ({ state }) => (
+//   <Button.Group hasAddons>
+//   { Object.values(terms)
+//       .map(value => 
+//         <Button key={value}
+//           color={ buttonColor(value === state.term) }
+//           onClick={ () => state.setTerm(value) }
+//           >
+//           { value }
+//         </Button>
+//       )
+//   }
+//   </Button.Group>
+// );
 
-const CourseList = ({ courses, user }) => {
-  const [term, setTerm] = useState('Fall');
-  const [selected, toggle] = useSelection();
-  const termCourses = courses.filter(course => term === getCourseTerm(course));
+// const CourseList = ({ courses, user }) => {
+//   const [term, setTerm] = useState('Fall');
+//   const [selected, toggle] = useSelection();
+//   const termCourses = courses.filter(course => term === getCourseTerm(course));
  
-  return (
-    <React.Fragment>
-      <TermSelector state={ { term, setTerm } } />
-      <Button.Group>
-        { termCourses.map(course =>
-           <Course key={ course.id } course={ course }
-             state={ { selected, toggle } }
-             user={ user } />) }
-      </Button.Group>
-    </React.Fragment>
-  );
-};
+//   return (
+//     <React.Fragment>
+//       <TermSelector state={ { term, setTerm } } />
+//       <Button.Group>
+//         { termCourses.map(course =>
+//            <Course key={ course.id } course={ course }
+//              state={ { selected, toggle } }
+//              user={ user } />) }
+//       </Button.Group>
+//     </React.Fragment>
+//   );
+// };
 
 const Welcome = ({ user }) => (
   <Message color="info">
